@@ -2,7 +2,7 @@
 import { createStore } from 'redux';
 const initialState = {
     trump_suit : "",
-    cards_on_table : Array(6).fill({}),
+    cards_on_table : [],
     neighbours : {},
     playing_list : [],
     owner : "",
