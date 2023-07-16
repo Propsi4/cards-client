@@ -1,0 +1,30 @@
+import itertools
+
+# отримуємо вхідні дані
+n = int(input())
+nums = list(map(int, input().split()))
+B = int(input())
+
+# створюємо список операцій (+, -, *, /)
+ops = ['+', '-', '*', '/']
+
+# перебираємо всі можливі комбінації чисел та операцій між ними
+for p in itertools.product(nums, repeat=n):
+    for op in itertools.product(ops, repeat=n-1):
+        # створюємо алгебраїчний терм за допомогою чисел та операцій
+        term = ''
+        for i in range(n-1):
+            term += str(p[i]) + op[i]
+        term += str(p[n-1])
+        
+        # обчислюємо значення алгебраїчного терму та порівнюємо з B
+        try:
+            val = eval(term)
+            if val == B:
+                print(term)
+                exit(0)
+        except:
+            pass
+
+# якщо не знайдено жодного алгебраїчного терму, що дає значення B, то виводимо "No"
+print("No")
