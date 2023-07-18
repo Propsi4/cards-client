@@ -13,6 +13,21 @@ export const getUsername = async (token) => {
 export const getImage = (card) => {
     return require('../images/cards/'+card.name+'-'+card.suit+'.png')
 } 
+
+export const validateUsername = async(username) => {
+    const regex = /^[a-zA-Z0-9_]+$/
+    const answer = {
+        length: true,
+        regex: true
+    }
+    if(username.length < 3 || username.length > 10){
+        answer.length = false
+    }
+    if (!regex.test(username)) {
+        answer.regex = false
+    }
+    return answer
+}
 export const setToken = async (username) => {
     const token = await fetch("/api/get_token", {
         method: "POST",

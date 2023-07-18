@@ -1,0 +1,373 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* border : 1px solid red */
+    /*overflow: hidden;*/
+  }
+  html { width: 100%; height: 100%;}
+  body {
+    background-color: #e0e0e0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .header{
+    display: flex;
+    z-index: 2;
+    position: sticky;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+  }
+  .header ul{
+    display: flex;
+    list-style: none;
+    
+  }
+  .header li{
+    cursor: pointer
+  }
+  .header li :first-child
+  {
+    position: absolute;
+    cursor: default;
+    left:0;
+    margin-left: 10px;
+  }
+  .content{
+  
+    display: grid;
+    /* overflow: hidden; */
+    grid-gap: 5px;
+    grid-template-rows: repeat(1, 1fr);
+    width: 100%;
+    height: calc(100vh - 50px);
+  }
+  .chat_container{
+    min-width: 165px;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    grid-column-start: 4;
+    grid-column-end: 4;
+  }
+  
+  .game_container{
+    position:relative;
+    overflow: hidden;
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  
+  .seat{
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-size: 0.9em;
+    word-wrap: normal;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right,  #11998e, #38ef7d);
+    border: 3px solid gray;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    width: 7vh;
+    height: 7vh;
+    background-color: #fff;
+  }
+  
+  
+  .seat-info{
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    padding: 2px;
+    border: 4px solid transparent;
+    border-radius: 4px;
+    border-image: linear-gradient(to right,  #11998e, #38ef7d) 1;
+    mask: 
+    linear-gradient(#fff 0 0);
+  
+  }
+  .seats{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap : 10px;
+    width: 100%;
+    height: 100%;
+  }
+  .seats :first-child{
+    top: 0;
+  }
+  .seats :last-child{
+    bottom: 0;
+  }
+  .buttons{
+    gap:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+  .player_side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: max-content;
+  }
+  .field{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cards{
+  
+    display: flex;
+    flex-direction: row;
+  }
+  .cards_list{
+    bottom: 0;
+    display: flex;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    position: absolute;
+    width: 100%;
+    max-height: 20vh;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(184, 182, 182, 0.5);
+  }
+  
+  .card_image {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    width: 8vh;
+    height: calc(7vh * 1.5);
+    margin: 5px;
+  }
+  .table{
+    position: absolute;
+    width: 100%;
+    overflow-y: hidden;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    top:50%;
+    transform: translateY(-50%);
+    grid-template-columns: repeat(3,0fr);
+    grid-template-rows: repeat(2,0fr);
+    gap : 10px;
+  }
+  .table_card{
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    width: 10vh;
+    background-color: white;
+    height: calc(10vh * 1.5);
+  }
+  .trump_suit{
+    position: absolute;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+  }
+  .online{
+    gap:5px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    margin-right: 10px;
+    font-size: 1em;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .online img{
+    width: 1em;
+    height: 1em;
+    animation: blink 5s linear infinite;
+  }
+  .online span{
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  @keyframes blink{
+    0%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0.2;
+    }
+  }
+  .online_users{
+    position: fixed;
+    display: flex;
+    background: rgba(165, 165, 165, 0.733);
+    color: black;
+    border-radius: 3px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    z-index: 100;
+    margin-right: 10px;
+    margin-top: 50px;
+    transform: translateY(+20%);
+    z-index: 100;
+    padding:2px;
+  }
+  .lobby{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 50px);
+  }
+  .chat-toggle{
+    position: absolute;
+    width: 50px;
+    right: 0;
+    z-index: 1;
+  }
+  .right, .left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .rooms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px; 
+  }
+  .room{
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap:20px;
+    background-color: gainsboro;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .roomID, .players{
+    font-size: 1rem;
+  }
+  
+  .info{
+    color: #11998e;
+  }
+  
+  .text-gradient-green{
+    background: linear-gradient(to right, #3ac9bd, #098137);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .seat-turn{
+    border: 4px #eb4034 solid;
+  }
+  .validation-result{
+    font-size: 0.8em;
+    transition: all 0.2s;
+    color: #1c1a1a;
+    text-align: center;
+  }
+  .valid{
+    color: #11998e;
+  }
+  .validation{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .input-username, .input-roomID, .lobby-buttons{
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .input-username{
+    flex-direction: column;
+  }
+  /* .input-username, .input-roomID{
+  
+    border: 1px solid #9b9b9b;
+    border-radius: 10px;
+  } */
+  .user-input{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap:10px;
+    border-radius: 38px;
+    background: #e0e0e0;
+    box-shadow:  5px 5px 11px #949494,
+                 -5px -5px 11px #ffffff;
+  }
+  .invalid-shake{
+    animation : invalid-anim 0.15s ease-in-out;
+  }
+  @keyframes invalid-anim {
+    0%{
+      transform: translateX(10px);
+    }
+    50%{
+  
+      transform: translateX(-10px);
+    }
+    100%{
+      transform: translateX(0px);
+    }
+  }

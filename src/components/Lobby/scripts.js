@@ -1,4 +1,6 @@
-import { getUsername, setToken } from "../../utils/utils";
+// this file contains all the functions that are used in the lobby component
+import { setToken, validateUsername } from "../../utils/utils";
+
 export  const canJOIN = async (username,roomID) => {
  const answer = await fetch("/api/can_join", {
     method: "POST",
@@ -14,43 +16,21 @@ export  const canJOIN = async (username,roomID) => {
 return answer;
 }
 export const play = async (username, roomID) => {
-    if (!username) {
-        alert("Please enter a username")
-        return
-    }
-    if(username.length < 3 || username.length > 10){
-        alert("Username must be between 3 and 10 characters")
-        return
-    }
-    if (!roomID) {
-        alert("Please enter a room ID")
-        return
-    }
-    if (await getUsername(localStorage.getItem("token")) !== username) {
-        setToken(username);
-    }
-    
 
-    if (await canJOIN(username,roomID)) {
-        return true
-    } else {
-        alert("Can't join the room")
-        return false
-    };
+    if (!roomID || !username) {
+        return
+    }
+    const validation_result = await validateUsername(username)
+    if(!Object.keys(validation_result).every((key) => validation_result[key] === true)) return false
+    await setToken(username);
+    const answer = await canJOIN(username,roomID).then((res) => {return res})
+    return answer;
 };
 
 export const createRoom = async (username) => {
-    if (!username) {
-        alert("Please enter a username")
-        return false
-    }
-    if(username.length < 3 || username.length > 10){
-        alert("Username must be between 3 and 10 characters")
-        return
-    }
-    if (await getUsername(localStorage.getItem("token")) !== username) {
-        await setToken(username);
-    }
+    const validation_result = await validateUsername(username)
+    if(!Object.keys(validation_result).every((key) => validation_result[key] === true)) return false
+    await setToken(username);
     const roomID = await fetch("/api/create_room", {
         method: "POST",
         headers: {
@@ -58,7 +38,18 @@ export const createRoom = async (username) => {
         },
         body: JSON.stringify({ token: localStorage.getItem("token") }),
     }).then((res) => res.json()).then((res) => res.roomID);
-    console.log(roomID)
     if(!roomID) return false
+    
     return roomID;
+}
+
+export const getRooms = async () => {
+    const rooms = await fetch("/api/rooms", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+
+    }).then((res) =>  res.json());
+    return rooms;
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import "./modalwindow.css"
 import ModalContent from './ModalContent'
 const ModalWindow = ({winner,loser, setResults}) => {
+  
   return (
 
     <div className='modal' onClick={() => setResults(null)}>

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { getImage } from '../../utils/utils'
 const ModalContent = ({player}) => {
+
   return (
     <div className='modal_content'>
         <div className='modal_header'>

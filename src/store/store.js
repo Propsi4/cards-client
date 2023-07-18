@@ -6,11 +6,17 @@ const initialState = {
     username : "",
     users: [],
     turn: 0,
-    is_admin : false
+    is_admin : false,
+    oldRoomID : ""
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+        case "SET_OLD_ROOM_ID":
+            return {
+                ...state,
+                oldRoomID: action.payload
+            }
         case "SET_TURN":
             return {
                 ...state,

@@ -11,8 +11,7 @@ import {
   TypingIndicator,
   ConversationHeader,
 } from "@chatscope/chat-ui-kit-react";
-import { getUsername } from "../../utils/utils";
-const Chat = () => {
+const Chat = ({chatVisible}) => {
   const [messages, setMessages] = useState([]);
   const [typingPeople, setTypingPeople] = useState([]);
   const [filteredTypingPeople, setFilteredTypingPeople] = useState([]);
@@ -40,7 +39,9 @@ const Chat = () => {
 
 
   return (
-    <div className="chat_container">
+    
+    <div style={{display : chatVisible ? "flex" : "none"}} className="chat_container">
+      
       <ConversationHeader style={{ height: "8%" }}>
         <ConversationHeader.Content
           userName="CHAT"
